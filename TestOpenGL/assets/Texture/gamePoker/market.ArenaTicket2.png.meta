@@ -1,0 +1,32 @@
+{
+  "ver": "2.3.0",
+  "uuid": "9db53d3b-6b2e-40da-b2d1-87a13c2ff660",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "platformSettings": {},
+  "subMetas": {
+    "market.ArenaTicket2": {
+      "ver": "1.0.3",
+      "uuid": "2a1240cf-dd95-4846-93f5-1a0978cb4f9f",
+      "rawTextureUuid": "9db53d3b-6b2e-40da-b2d1-87a13c2ff660",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0.5,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 327,
+      "height": 336,
+      "rawWidth": 327,
+      "rawHeight": 337,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
