@@ -41,7 +41,7 @@ export default class DataMannager {
 
     revData(data:any){
         cc.log("the key is ok")
-        if(data.keys){
+        if(data.keys !=null){ //when keys is 0, will think is error 
             playerData.getInstance().setwsKeys(data.keys);
         }
 
@@ -80,7 +80,15 @@ export default class DataMannager {
 
     gameGetCard(data){
         if (data.act === 0x15){ //游戏
-            
+            console.log("随机发牌===》",data.msg.act)
+            if (data.msg.act ==0x01){ //随机发牌了
+                playerData.getInstance().setGameCommand(data.msg.act)
+                playerData.getInstance().setGameCard(data.msg.card)
+                playerData.getInstance().setGameScore(data.msg.score)
+
+                let pEvent = new cc.Event.EventCustom(clientDefineGame1.servceGameUpdata, true);
+                cc.systemEvent.dispatchEvent(pEvent);
+            }
         }else{
 
         }

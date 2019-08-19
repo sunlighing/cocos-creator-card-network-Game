@@ -15,7 +15,11 @@ export default class PlayerData {
     
     private enomyName :any = null;
 
-    private gameCommand :any = null;//游戏治理
+    private gameCommand :any = null;//游戏命令
+    
+    private Gamescore : any = null;
+
+    private GameCard :any = null;
 
     // 单例
     public static getInstance(): PlayerData {
@@ -86,6 +90,22 @@ export default class PlayerData {
         return this.gameCommand;
     }
 
+    public setGameScore(temp: any) {
+        this.Gamescore = temp
+    }
+
+    public getGameScore() {
+        return this.Gamescore;
+    }
+    
+    public setGameCard(temp:any){
+        this.GameCard = temp
+    }
+
+    public getGameMeCard(){
+        return this.GameCard;
+    }
+
     // 这部分写的是定义好的数据包，随即可用，在此类执行即可，良好的封装性
     /**
      * 0x14 在线匹配房间
@@ -95,6 +115,7 @@ export default class PlayerData {
      *    act :0x14
      *  }
      */
+
     public getMatchingRoom() {
         return {
             name:this.name,
@@ -110,6 +131,7 @@ export default class PlayerData {
             act:ServerceDineGame2.gameIngData,
             msg:{
                 act :0x01,//要牌 
+                room: this.roomNum
             }
         }
     }

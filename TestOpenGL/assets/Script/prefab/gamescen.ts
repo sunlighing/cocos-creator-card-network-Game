@@ -1,6 +1,8 @@
 import DataMannager from "../dataMgr";
 import { clientDefineGame1 } from '../headDine'
 import PlayerData from '../PlayerData';
+import prefabMgr from '../prefabMgr';
+import { setPoints } from '../../../creator';
 
 
 const { ccclass, property } = cc._decorator;
@@ -32,6 +34,9 @@ export default class gameSence extends cc.Component {
     
   @property(cc.Sprite)
   enemyHead:cc.Sprite = null;
+
+  @property(cc.Node)
+  cardNode:cc.Node  =null
 
   buttonIndex = 0 
 
@@ -68,28 +73,51 @@ export default class gameSence extends cc.Component {
             if (this.buttonIndex == 1) {
                 this.buttonIndex = this.buttonIndex + 1;
                 PlayerData.getInstance().setWsSendData(
-                    PlayerData.getInstance().getMatchingRoom()
+                  PlayerData.getInstance().getGameCard()
                 );
                 DataMannager.getInstance().send()
             }
-        })
+        }.bind(this))
 
         this.Button3.node.on("click",function(){
             if (this.buttonIndex == 2) {
                 this.buttonIndex = this.buttonIndex + 1;
                 PlayerData.getInstance().setWsSendData(
-                    PlayerData.getInstance().getMatchingRoom()
+                  PlayerData.getInstance().getGameCard()
                 );
                 DataMannager.getInstance().send()
             }
-        })
+        }.bind(this))
 
         this.kaipaibutton1.node.on("click",function(){
             
         })
+        
     }
 
     servceGame(){
+        if (PlayerData.getInstance().getGameCommand() ==0x01){
+            //prefabMgr.getInstance().fabMgr.gethi
+            this.lidtoOn()
+        } else if (PlayerData.getInstance().getGameCommand() == 0x02){
+            
+        }
+    }
+
+
+    lidtoOn(){
+        console.log("开始开盖子动作")
+        this.barrelNode.active = true
+        this.barrelNode.getChildByName("lid").runAction(cc.sequence(cc.moveTo(1,cc.v2(0,230)),cc.callFunc(function(){
+            this.barrelNode.active = false 
+            this.barrelNode.getChildByName("lid").setPosition(0, 47)
+            let node = prefabMgr.getInstance().getfabMgr().get("cardPre").get();
+            console.log(node);
+            node.getComponent("cardPre").init(PlayerData.getInstance().getGameMeCard())
+            
+            this.cardNode.addChild(node);
+
+        },this)))
         
     }
 
